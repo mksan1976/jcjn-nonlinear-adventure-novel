@@ -40,8 +40,7 @@
         </div>
     </div>
     
-    // chapter1.html - 修正後的 HTML 結構
-<div class="container content" id="content-container">
+    <div class="container content" id="content-container">
 
         <h3 class="novel-title">《加乘激能：我們的非線性冒險》</h3>
 
@@ -338,22 +337,24 @@
         // -------------------------------------
         // 側邊欄開合功能 (Sidebar Toggle)
         // -------------------------------------
-        
-function toggleNav() {
-    var sidebar = document.getElementById("mySidebar");
-    var contentContainer = document.getElementById("content-container"); // <-- 修正：改為目標內容容器
-    
-    if (sidebar.style.width === "300px") {
-        sidebar.style.width = "0";
-        contentContainer.style.marginLeft = "0"; // <-- 修正
-    } else {
-        sidebar.style.width = "300px";
-        // 寬螢幕時推動內容，窄螢幕時側邊欄蓋在內容上
-        if (window.innerWidth > 768) {
-            contentContainer.style.marginLeft = "300px"; // <-- 修正
+        function toggleNav() {
+            var sidebar = document.getElementById("mySidebar");
+            // ⭐ 修正 1: 改為取得正確的內容容器
+            var contentContainer = document.getElementById("content-container"); 
+            
+            if (sidebar.style.width === "300px") {
+                sidebar.style.width = "0";
+                // ⭐ 修正 2: 推動內容容器的 margin-left
+                contentContainer.style.marginLeft = "0";
+            } else {
+                sidebar.style.width = "300px";
+                // 寬螢幕時推動內容，窄螢幕時側邊欄蓋在內容上
+                if (window.innerWidth > 768) {
+                    // ⭐ 修正 3: 推動內容容器的 margin-left
+                    contentContainer.style.marginLeft = "300px"; 
+                }
+            }
         }
-    }
-}
         
         // -------------------------------------
         // 字體大小調整功能 (Font Size Adjustment)
@@ -370,9 +371,8 @@ function toggleNav() {
             // 限制字體大小在合理範圍內
             if (newFontSize >= minFontSize && newFontSize <= maxFontSize) {
                 currentFontSize = newFontSize;
-                // 更新 CSS 變量，toFixed(1) 保留一位小數
-                // chapter1.html - 修正後的 JS
-document.documentElement.style.setProperty('--base-font-size', currentFontSize.toFixed(1) + 'em');
+                // ⭐ 修正 4: 將變數名稱從 '--font-size-base' 改為正確的 '--base-font-size'
+                document.documentElement.style.setProperty('--base-font-size', currentFontSize.toFixed(1) + 'em');
             }
         }
     </script>
