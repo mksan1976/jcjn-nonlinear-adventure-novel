@@ -40,7 +40,8 @@
         </div>
     </div>
     
-    <div class="container" id="content-container">
+    // chapter1.html - 修正後的 HTML 結構
+<div class="container content" id="content-container">
 
         <h3 class="novel-title">《加乘激能：我們的非線性冒險》</h3>
 
@@ -337,21 +338,22 @@
         // -------------------------------------
         // 側邊欄開合功能 (Sidebar Toggle)
         // -------------------------------------
-        function toggleNav() {
-            var sidebar = document.getElementById("mySidebar");
-            var body = document.body;
-            
-            if (sidebar.style.width === "300px") {
-                sidebar.style.width = "0";
-                body.style.marginLeft = "0";
-            } else {
-                sidebar.style.width = "300px";
-                // 寬螢幕時推動內容，窄螢幕時側邊欄蓋在內容上
-                if (window.innerWidth > 768) {
-                    body.style.marginLeft = "300px"; 
-                }
-            }
+        // chapter1.html - 修正後的 JS
+function toggleNav() {
+    var sidebar = document.getElementById("mySidebar");
+    var contentContainer = document.getElementById("content-container"); // <-- 修正：改為目標內容容器
+    
+    if (sidebar.style.width === "300px") {
+        sidebar.style.width = "0";
+        contentContainer.style.marginLeft = "0"; // <-- 修正
+    } else {
+        sidebar.style.width = "300px";
+        // 寬螢幕時推動內容，窄螢幕時側邊欄蓋在內容上
+        if (window.innerWidth > 768) {
+            contentContainer.style.marginLeft = "300px"; // <-- 修正
         }
+    }
+}
         
         // -------------------------------------
         // 字體大小調整功能 (Font Size Adjustment)
@@ -369,7 +371,8 @@
             if (newFontSize >= minFontSize && newFontSize <= maxFontSize) {
                 currentFontSize = newFontSize;
                 // 更新 CSS 變量，toFixed(1) 保留一位小數
-                document.documentElement.style.setProperty('--font-size-base', currentFontSize.toFixed(1) + 'em');
+                // chapter1.html - 修正後的 JS
+document.documentElement.style.setProperty('--base-font-size', currentFontSize.toFixed(1) + 'em');
             }
         }
     </script>
